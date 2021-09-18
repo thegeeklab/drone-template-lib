@@ -71,6 +71,56 @@ local PipelineTest(deps=[],) = {
   },
 };
 
+local PipelineRelease(deps=[],) = {
+  kind: 'pipeline',
+  image_pull_secrets: ['docker_config'],
+  name: 'release',
+  platform: {
+    os: 'linux',
+    arch: 'amd64',
+  },
+  steps: [
+    {
+      name: 'changelog-generate',
+      image: 'thegeeklab/git-chglog',
+      commands: [
+        'git fetch -tq',
+        'git-chglog --no-color --no-emoji -o CHANGELOG.md ${DRONE_TAG:---next-tag unreleased unreleased}',
+      ],
+    },
+    {
+      name: 'changelog-format',
+      image: 'thegeeklab/alpine-tools',
+      commands: [
+        'prettier CHANGELOG.md',
+        'prettier -w CHANGELOG.md',
+      ],
+    },
+    {
+      name: 'publish',
+      image: 'plugins/github-release',
+      settings: {
+        overwrite: true,
+        api_key: {
+          from_secret: 'github_token',
+        },
+        files: ['release/*'],
+        title: '${DRONE_TAG}',
+        note: 'CHANGELOG.md',
+      },
+      when: {
+        ref: [
+          'refs/tags/**',
+        ],
+      },
+    },
+  ],
+  depends_on: deps,
+  trigger: {
+    ref: ['refs/heads/main', 'refs/tags/**', 'refs/pull/**'],
+  },
+};
+
 local PipelineDocs(deps=[],) = {
   kind: 'pipeline',
   name: 'docs',
@@ -137,6 +187,7 @@ local PipelineNotifications(deps=[],) = {
 
 [
   PipelineTest(),
-  PipelineDocs(deps=['test']),
+  PipelineRelease(deps=['test'],),
+  PipelineDocs(deps=['release']),
   PipelineNotifications(deps=['docs']),
 ]

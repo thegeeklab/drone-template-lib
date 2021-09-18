@@ -45,6 +45,46 @@ volumes:
 ---
 depends_on:
 - test
+image_pull_secrets:
+- docker_config
+kind: pipeline
+name: release
+platform:
+  arch: amd64
+  os: linux
+steps:
+- commands:
+  - git fetch -tq
+  - git-chglog --no-color --no-emoji -o CHANGELOG.md ${DRONE_TAG:---next-tag unreleased
+    unreleased}
+  image: thegeeklab/git-chglog
+  name: changelog-generate
+- commands:
+  - prettier CHANGELOG.md
+  - prettier -w CHANGELOG.md
+  image: thegeeklab/alpine-tools
+  name: changelog-format
+- image: plugins/github-release
+  name: publish
+  settings:
+    api_key:
+      from_secret: github_token
+    files:
+    - release/*
+    note: CHANGELOG.md
+    overwrite: true
+    title: ${DRONE_TAG}
+  when:
+    ref:
+    - refs/tags/**
+trigger:
+  ref:
+  - refs/heads/main
+  - refs/tags/**
+  - refs/pull/**
+---
+depends_on:
+- release
 kind: pipeline
 name: docs
 platform:
@@ -105,6 +145,6 @@ trigger:
   - failure
 ---
 kind: signature
-hmac: 758e035deda2239882aef0b1654916e376f5959883149f109dcb59a30faa9d96
+hmac: 54d16ad27faa72c5a91fdd8fcf6031bdd15676183fc2edb1bd00db86551a306d
 
 ...
