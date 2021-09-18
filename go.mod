@@ -10,5 +10,5 @@ require (
 	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
-	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
+	golang.org/x/crypto v0.0.0-20210915214749-c084706c2272 // indirect
 )
