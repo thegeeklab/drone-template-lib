@@ -104,7 +104,6 @@ local PipelineRelease(deps=[],) = {
         api_key: {
           from_secret: 'github_token',
         },
-        files: ['release/*'],
         title: '${DRONE_TAG}',
         note: 'CHANGELOG.md',
       },
