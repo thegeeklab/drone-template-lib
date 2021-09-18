@@ -1,4 +1,4 @@
-module github.com/thegeeklab/drone-template-lib
+module github.com/thegeeklab/drone-template-lib/v2
 
 go 1.16
 
