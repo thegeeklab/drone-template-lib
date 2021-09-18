@@ -1,16 +1,16 @@
 # drone-template-lib
 
-[![Build Status](https://cloud.drone.io/api/badges/drone/drone-template-lib/status.svg)](https://cloud.drone.io/drone/drone-template-lib)
-[![Join the discussion at https://discourse.drone.io](https://img.shields.io/badge/discourse-forum-orange.svg)](https://discourse.drone.io)
-[![Drone questions at https://stackoverflow.com](https://img.shields.io/badge/drone-stackoverflow-orange.svg)](https://stackoverflow.com/questions/tagged/drone.io)
-[![Go Doc](https://godoc.org/github.com/drone/drone-template-lib?status.svg)](http://godoc.org/github.com/drone/drone-template-lib)
-[![Go Report](https://goreportcard.com/badge/github.com/drone/drone-template-lib)](https://goreportcard.com/report/github.com/drone/drone-template-lib)
+[![Build Status](https://img.shields.io/drone/build/thegeeklab/drone-template-lib?logo=drone&server=https%3A%2F%2Fdrone.thegeeklab.de)](https://drone.thegeeklab.de/thegeeklab/drone-template-lib)
+[![Go Report Card](https://goreportcard.com/badge/github.com/thegeeklab/drone-template-lib)](https://goreportcard.com/report/github.com/thegeeklab/drone-template-lib)
+[![GitHub contributors](https://img.shields.io/github/contributors/thegeeklab/drone-template-lib)](https://github.com/thegeeklab/drone-template-lib/graphs/contributors)
+[![Source: GitHub](https://img.shields.io/badge/source-github-blue.svg?logo=github&logoColor=white)](https://github.com/thegeeklab/drone-template-lib)
+[![License: MIT](https://img.shields.io/github/license/thegeeklab/drone-template-lib)](https://github.com/thegeeklab/drone-template-lib/blob/main/LICENSE)
 
-A Go client library for creating templateable [plugins](http://plugins.drone.io).
+A Go client library for Drone plugins that need to create templates.
 
 ## Usage
 
-### Download the packe
+### Download the package
 
 ```bash
 go get -d github.com/drone/drone-template-lib
@@ -21,3 +21,12 @@ go get -d github.com/drone/drone-template-lib
 ```Go
 import "github.com/drone/drone-template-lib/template"
 ```
+
+## Contributors
+
+Special thanks goes to all [contributors](https://github.com/thegeeklab/drone-template-lib/graphs/contributors). If you would like to contribute,
+please see the [instructions](https://github.com/thegeeklab/drone-template-lib/blob/main/CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/thegeeklab/drone-template-lib/blob/main/LICENSE) file for details.

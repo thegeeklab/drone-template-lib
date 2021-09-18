@@ -1,1 +1,5 @@
+/release/
+/drone-template-lib*
+
 coverage.out
+CHANGELOG.md

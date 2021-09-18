@@ -1,56 +1,150 @@
 ---
+depends_on: []
 kind: pipeline
-type: docker
-name: testing
-
+name: test
 platform:
-  os: linux
   arch: amd64
-
+  os: linux
 steps:
-- name: environment
-  image: golang:1.15
-  commands:
-  - go version
-  - go env
-  volumes:
-  - name: gopath
-    path: /go
-
-- name: staticcheck
-  image: golang:1.15
-  commands:
+- commands:
   - go run honnef.co/go/tools/cmd/staticcheck ./...
+  image: golang:1.16
+  name: staticcheck
   volumes:
   - name: gopath
     path: /go
-
-- name: lint
-  image: golang:1.15
-  commands:
+- commands:
   - go run golang.org/x/lint/golint -set_exit_status ./...
+  image: golang:1.16
+  name: lint
   volumes:
   - name: gopath
     path: /go
-
-- name: vet
-  image: golang:1.15
-  commands:
+- commands:
   - go vet ./...
+  image: golang:1.16
+  name: vet
   volumes:
   - name: gopath
     path: /go
-
-- name: test
-  image: golang:1.15
-  commands:
-  - go test -cover -v ./...
+- commands:
+  - go test -cover ./...
+  image: golang:1.16
+  name: test
   volumes:
   - name: gopath
     path: /go
-
+trigger:
+  ref:
+  - refs/heads/main
+  - refs/tags/**
+  - refs/pull/**
 volumes:
 - name: gopath
   temp: {}
+---
+depends_on:
+- test
+image_pull_secrets:
+- docker_config
+kind: pipeline
+name: release
+platform:
+  arch: amd64
+  os: linux
+steps:
+- commands:
+  - git fetch -tq
+  - git-chglog --no-color --no-emoji -o CHANGELOG.md ${DRONE_TAG:---next-tag unreleased
+    unreleased}
+  image: thegeeklab/git-chglog
+  name: changelog-generate
+- commands:
+  - prettier CHANGELOG.md
+  - prettier -w CHANGELOG.md
+  image: thegeeklab/alpine-tools
+  name: changelog-format
+- image: plugins/github-release
+  name: publish
+  settings:
+    api_key:
+      from_secret: github_token
+    files:
+    - release/*
+    note: CHANGELOG.md
+    overwrite: true
+    title: ${DRONE_TAG}
+  when:
+    ref:
+    - refs/tags/**
+trigger:
+  ref:
+  - refs/heads/main
+  - refs/tags/**
+  - refs/pull/**
+---
+depends_on:
+- release
+kind: pipeline
+name: docs
+platform:
+  arch: amd64
+  os: linux
+steps:
+- commands:
+  - markdownlint 'README.md' 'CONTRIBUTING.md'
+  image: thegeeklab/markdownlint-cli
+  name: markdownlint
+- commands:
+  - npm install -g spellchecker-cli
+  - spellchecker --files 'README.md' 'CONTRIBUTING.md' -d .dictionary -p spell indefinite-article
+    syntax-urls --no-suggestions
+  environment:
+    FORCE_COLOR: true
+    NPM_CONFIG_LOGLEVEL: error
+  image: node:lts-alpine
+  name: spellcheck
+trigger:
+  ref:
+  - refs/heads/main
+  - refs/tags/**
+  - refs/pull/**
+---
+depends_on:
+- docs
+kind: pipeline
+name: notifications
+platform:
+  arch: amd64
+  os: linux
+steps:
+- image: plugins/matrix
+  name: matrix
+  settings:
+    homeserver:
+      from_secret: matrix_homeserver
+    password:
+      from_secret: matrix_password
+    roomid:
+      from_secret: matrix_roomid
+    template: 'Status: **{{ build.status }}**<br/> Build: [{{ repo.Owner }}/{{ repo.Name
+      }}]({{ build.link }}) ({{ build.branch }}) by {{ build.author }}<br/> Message:
+      {{ build.message }}'
+    username:
+      from_secret: matrix_username
+  when:
+    status:
+    - success
+    - failure
+trigger:
+  ref:
+  - refs/heads/main
+  - refs/tags/**
+  status:
+  - success
+  - failure
+---
+kind: signature
+hmac: 54d16ad27faa72c5a91fdd8fcf6031bdd15676183fc2edb1bd00db86551a306d
 
 ...
