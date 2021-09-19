@@ -144,7 +144,7 @@ steps:
         from_secret: matrix_password
       roomid:
         from_secret: matrix_roomid
-      template: "Status: **{{ build.status }}**<br/> Build: [{{ repo.Owner }}/{{ repo.Name }}]({{ build.link }}) ({{ build.branch }}) by {{ build.author }}<br/> Message: {{ build.message }}"
+      template: "Status: **{{ build.Status }}**<br/> Build: [{{ repo.Owner }}/{{ repo.Name }}]({{ build.Link }}) ({{ build.Branch }}) by {{ commit.Author }}<br/> Message: {{ commit.Message }}"
       username:
         from_secret: matrix_username
     when:
@@ -165,4 +165,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 42a2167ae9705a4a04a27f4b333263c30dab5921dac8eed61fee0636d4e1ed50
+hmac: 1ce4587c06e6c53cfb4ea79d2a645174eebde037849ac76ca5e1a6e6937bb9c0
+
+...
