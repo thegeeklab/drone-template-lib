@@ -12,5 +12,5 @@ require (
 	github.com/spf13/cast v1.4.1 // indirect
 	golang.org/x/crypto v0.0.0-20210915214749-c084706c2272 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616
-	honnef.co/go/tools v0.2.1
+	honnef.co/go/tools v0.2.2
 )
