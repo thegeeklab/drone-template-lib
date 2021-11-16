@@ -4,7 +4,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/thegeeklab/drone-template-lib)](https://goreportcard.com/report/github.com/thegeeklab/drone-template-lib)
 [![GitHub contributors](https://img.shields.io/github/contributors/thegeeklab/drone-template-lib)](https://github.com/thegeeklab/drone-template-lib/graphs/contributors)
 [![Source: GitHub](https://img.shields.io/badge/source-github-blue.svg?logo=github&logoColor=white)](https://github.com/thegeeklab/drone-template-lib)
-[![License: MIT](https://img.shields.io/github/license/thegeeklab/drone-template-lib)](https://github.com/thegeeklab/drone-template-lib/blob/main/LICENSE)
+[![License: Apache-2.0](https://img.shields.io/github/license/thegeeklab/drone-template-lib)](https://github.com/thegeeklab/drone-template-lib/blob/main/LICENSE)
 
 A Go client library for Drone plugins that need to create templates.
 
@@ -29,4 +29,4 @@ please see the [instructions](https://github.com/thegeeklab/drone-template-lib/b
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/thegeeklab/drone-template-lib/blob/main/LICENSE) file for details.
+This project is licensed under the Apache-2.0 License - see the [LICENSE](https://github.com/thegeeklab/drone-template-lib/blob/main/LICENSE) file for details.
