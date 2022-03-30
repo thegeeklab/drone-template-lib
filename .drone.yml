@@ -8,7 +8,7 @@ platform:
 
 steps:
   - name: staticcheck
-    image: golang:1.16
+    image: golang:1.18
     commands:
       - go run honnef.co/go/tools/cmd/staticcheck ./...
     volumes:
@@ -16,7 +16,7 @@ steps:
         path: /go
 
   - name: lint
-    image: golang:1.16
+    image: golang:1.18
     commands:
       - go run golang.org/x/lint/golint -set_exit_status ./...
     volumes:
@@ -24,7 +24,7 @@ steps:
         path: /go
 
   - name: vet
-    image: golang:1.16
+    image: golang:1.18
     commands:
       - go vet ./...
     volumes:
@@ -32,7 +32,7 @@ steps:
         path: /go
 
   - name: test
-    image: golang:1.16
+    image: golang:1.18
     commands:
       - go test -cover ./...
     volumes:
@@ -165,6 +165,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: c5f16f71d90d1170d983e99f3518b24e77118aa13a0c0e87d794288c14ba4cda
+hmac: 04aac91eaaeda8f096e860f3878ca029473d3403d082b2727b0b9d41252ee0c0
 
 ...

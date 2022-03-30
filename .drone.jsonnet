@@ -8,7 +8,7 @@ local PipelineTest(deps=[],) = {
   steps: [
     {
       name: 'staticcheck',
-      image: 'golang:1.16',
+      image: 'golang:1.18',
       commands: [
         'go run honnef.co/go/tools/cmd/staticcheck ./...',
       ],
@@ -21,7 +21,7 @@ local PipelineTest(deps=[],) = {
     },
     {
       name: 'lint',
-      image: 'golang:1.16',
+      image: 'golang:1.18',
       commands: [
         'go run golang.org/x/lint/golint -set_exit_status ./...',
       ],
@@ -34,7 +34,7 @@ local PipelineTest(deps=[],) = {
     },
     {
       name: 'vet',
-      image: 'golang:1.16',
+      image: 'golang:1.18',
       commands: [
         'go vet ./...',
       ],
@@ -47,7 +47,7 @@ local PipelineTest(deps=[],) = {
     },
     {
       name: 'test',
-      image: 'golang:1.16',
+      image: 'golang:1.18',
       commands: [
         'go test -cover ./...',
       ],

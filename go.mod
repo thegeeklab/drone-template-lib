@@ -1,16 +1,28 @@
 module github.com/thegeeklab/drone-template-lib/v2
 
-go 1.16
+go 1.18
 
 require (
 	github.com/Masterminds/sprig/v3 v3.2.2
 	github.com/flowchartsman/handlebars/v3 v3.0.1
+	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616
+	honnef.co/go/tools v0.2.2
+)
+
+require (
+	github.com/BurntSushi/toml v0.3.1 // indirect
+	github.com/Masterminds/goutils v1.1.1 // indirect
+	github.com/Masterminds/semver/v3 v3.1.1 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/huandu/xstrings v1.3.2 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
+	github.com/mitchellh/reflectwalk v1.0.2 // indirect
+	github.com/shopspring/decimal v1.3.1 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
-	golang.org/x/crypto v0.0.0-20210915214749-c084706c2272 // indirect
-	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616
-	honnef.co/go/tools v0.2.2
+	golang.org/x/crypto v0.0.0-20220321153916-2c7772ba3064 // indirect
+	golang.org/x/mod v0.3.0 // indirect
+	golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1 // indirect
+	golang.org/x/tools v0.1.0 // indirect
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 )
