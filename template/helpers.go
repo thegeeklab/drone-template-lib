@@ -120,7 +120,7 @@ func uppercaseFirst(s string) string {
 	return s
 }
 
-func regexReplace(pattern string, input string, replacement string) string {
+func regexReplace(pattern, input, replacement string) string {
 	re := regexp.MustCompile(pattern)
 	return re.ReplaceAllString(input, replacement)
 }
@@ -140,12 +140,12 @@ func validHelper(f interface{}) bool {
 		int64,
 		[][]interface{},
 		[]interface{},
-		interface{},
 		map[string]interface{},
 		map[string]string,
 		[]string,
 		string,
-		time.Time:
+		time.Time,
+		interface{}:
 		return true
 	}
 	return false

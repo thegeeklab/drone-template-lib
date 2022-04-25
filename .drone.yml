@@ -7,40 +7,32 @@ platform:
   arch: amd64
 
 steps:
-  - name: staticcheck
+  - name: deps
     image: golang:1.18
     commands:
-      - go run honnef.co/go/tools/cmd/staticcheck ./...
+      - make deps
     volumes:
-      - name: gopath
+      - name: godeps
         path: /go
 
   - name: lint
     image: golang:1.18
     commands:
-      - go run golang.org/x/lint/golint -set_exit_status ./...
+      - make lint
     volumes:
-      - name: gopath
-        path: /go
-
-  - name: vet
-    image: golang:1.18
-    commands:
-      - go vet ./...
-    volumes:
-      - name: gopath
+      - name: godeps
         path: /go
 
   - name: test
     image: golang:1.18
     commands:
-      - go test -cover ./...
+      - make test
     volumes:
-      - name: gopath
+      - name: godeps
         path: /go
 
 volumes:
-  - name: gopath
+  - name: godeps
     temp: {}
 
 trigger:
@@ -165,6 +157,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 04aac91eaaeda8f096e860f3878ca029473d3403d082b2727b0b9d41252ee0c0
+hmac: b3a76d417349cf063ff7e732e1094818aa0c09511b1808b355ba09553a5e4360
 
 ...

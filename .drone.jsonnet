@@ -7,14 +7,14 @@ local PipelineTest(deps=[],) = {
   },
   steps: [
     {
-      name: 'staticcheck',
+      name: 'deps',
       image: 'golang:1.18',
       commands: [
-        'go run honnef.co/go/tools/cmd/staticcheck ./...',
+        'make deps',
       ],
       volumes: [
         {
-          name: 'gopath',
+          name: 'godeps',
           path: '/go',
         },
       ],
@@ -23,24 +23,11 @@ local PipelineTest(deps=[],) = {
       name: 'lint',
       image: 'golang:1.18',
       commands: [
-        'go run golang.org/x/lint/golint -set_exit_status ./...',
+        'make lint',
       ],
       volumes: [
         {
-          name: 'gopath',
-          path: '/go',
-        },
-      ],
-    },
-    {
-      name: 'vet',
-      image: 'golang:1.18',
-      commands: [
-        'go vet ./...',
-      ],
-      volumes: [
-        {
-          name: 'gopath',
+          name: 'godeps',
           path: '/go',
         },
       ],
@@ -49,11 +36,11 @@ local PipelineTest(deps=[],) = {
       name: 'test',
       image: 'golang:1.18',
       commands: [
-        'go test -cover ./...',
+        'make test',
       ],
       volumes: [
         {
-          name: 'gopath',
+          name: 'godeps',
           path: '/go',
         },
       ],
@@ -61,7 +48,7 @@ local PipelineTest(deps=[],) = {
   ],
   volumes: [
     {
-      name: 'gopath',
+      name: 'godeps',
       temp: {},
     },
   ],
