@@ -24,8 +24,7 @@ import "github.com/drone/drone-template-lib/template"
 
 ## Contributors
 
-Special thanks goes to all [contributors](https://github.com/thegeeklab/drone-template-lib/graphs/contributors). If you would like to contribute,
-please see the [instructions](https://github.com/thegeeklab/drone-template-lib/blob/main/CONTRIBUTING.md).
+Special thanks goes to all [contributors](https://github.com/thegeeklab/drone-template-lib/graphs/contributors). If you would like to contribute, please see the [instructions](https://github.com/thegeeklab/drone-template-lib/blob/main/CONTRIBUTING.md).
 
 ## License
 
