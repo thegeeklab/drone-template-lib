@@ -8,7 +8,7 @@ local PipelineTest(deps=[],) = {
   steps: [
     {
       name: 'deps',
-      image: 'golang:1.18',
+      image: 'golang:1.19',
       commands: [
         'make deps',
       ],
@@ -21,7 +21,7 @@ local PipelineTest(deps=[],) = {
     },
     {
       name: 'lint',
-      image: 'golang:1.18',
+      image: 'golang:1.19',
       commands: [
         'make lint',
       ],
@@ -34,7 +34,7 @@ local PipelineTest(deps=[],) = {
     },
     {
       name: 'test',
-      image: 'golang:1.18',
+      image: 'golang:1.19',
       commands: [
         'make test',
       ],
