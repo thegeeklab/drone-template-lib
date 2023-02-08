@@ -1,5 +1,7 @@
 # drone-template-lib
 
+> DISCONTINUED: This library is no longer maintained and will be removed in the future. The template helpers are now part of [thegeeklab/drone-plugin-lib](https://github.com/thegeeklab/drone-plugin-lib).
+
 [![Build Status](https://img.shields.io/drone/build/thegeeklab/drone-template-lib?logo=drone&server=https%3A%2F%2Fdrone.thegeeklab.de)](https://drone.thegeeklab.de/thegeeklab/drone-template-lib)
 [![Go Report Card](https://goreportcard.com/badge/github.com/thegeeklab/drone-template-lib)](https://goreportcard.com/report/github.com/thegeeklab/drone-template-lib)
 [![GitHub contributors](https://img.shields.io/github/contributors/thegeeklab/drone-template-lib)](https://github.com/thegeeklab/drone-template-lib/graphs/contributors)
